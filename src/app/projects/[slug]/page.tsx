@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import { allProjects, getProjectBySlug } from "@/data/projects";
 
 type ProjectPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export function generateStaticParams() {
@@ -14,7 +14,7 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
   const project = getProjectBySlug(slug);
 
   if (!project) {
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const project = getProjectBySlug(slug);
 
   if (!project) {

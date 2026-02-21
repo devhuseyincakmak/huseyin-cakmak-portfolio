@@ -56,6 +56,7 @@ export default function ToolsPage() {
                         aria-label={`${item.name} logo`}
                       />
                     ) : (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img src={item.logo} alt={`${item.name} logo`} width={28} height={28} />
                     )}
                   </span>
